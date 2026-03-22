@@ -10,7 +10,7 @@ const CATALOG = {
   tradicionais: [
     {
       id: 't1',
-      emoji: '🍫',
+      accent: '#8B5E3C',
       name: 'Brigadeiro Tradicional',
       desc: 'Granulê de chocolate ao leite ou crocante',
       priceUni: 3.00,
@@ -18,7 +18,7 @@ const CATALOG = {
     },
     {
       id: 't2',
-      emoji: '🥥',
+      accent: '#C4A882',
       name: 'Beijinho',
       desc: 'Finalizado com coco ralado',
       priceUni: 3.00,
@@ -26,7 +26,7 @@ const CATALOG = {
     },
     {
       id: 't3',
-      emoji: '🥛',
+      accent: '#D4B896',
       name: 'Leite Ninho',
       desc: 'Finalizado com leite Ninho',
       priceUni: 3.00,
@@ -34,15 +34,15 @@ const CATALOG = {
     },
     {
       id: 't4',
-      emoji: '🍓',
-      name: 'Bicho de pé',
+      accent: '#A0604A',
+      name: 'Bicho de Pé',
       desc: 'Moranguinho, finalizado com leite Ninho',
       priceUni: 3.00,
       priceCento: 180.00,
     },
     {
       id: 't5',
-      emoji: '🥜',
+      accent: '#9C7A4A',
       name: 'Paçoca',
       desc: 'Finalizado com farofa de paçoca',
       priceUni: 3.00,
@@ -50,7 +50,7 @@ const CATALOG = {
     },
     {
       id: 't6',
-      emoji: '☕',
+      accent: '#5C4033',
       name: 'Café',
       desc: 'Finalizado com chocolate em pó',
       priceUni: 3.00,
@@ -58,9 +58,9 @@ const CATALOG = {
     },
     {
       id: 't7',
-      emoji: '🎊',
+      accent: '#7A5C8A',
       name: 'Brigadeiro com Confete',
-      desc: 'Com confetes coloridos',
+      desc: 'Com granulado colorido',
       priceUni: 3.00,
       priceCento: 180.00,
     },
@@ -68,7 +68,7 @@ const CATALOG = {
   mistos: [
     {
       id: 'm1',
-      emoji: '💛',
+      accent: '#B8934A',
       name: 'Ninho com Nutella',
       desc: 'Misto de Ninho com Nutella',
       priceUni: 3.00,
@@ -76,7 +76,7 @@ const CATALOG = {
     },
     {
       id: 'm2',
-      emoji: '🌴',
+      accent: '#7A9C6A',
       name: 'Prestígio',
       desc: 'Brigadeiro com beijinho, finalizado com coco',
       priceUni: 3.00,
@@ -84,7 +84,7 @@ const CATALOG = {
     },
     {
       id: 'm3',
-      emoji: '🤎',
+      accent: '#8B7355',
       name: 'Casadinho',
       desc: 'Chocolate com Ninho, finalizado com Ninho',
       priceUni: 3.00,
@@ -92,7 +92,7 @@ const CATALOG = {
     },
     {
       id: 'm4',
-      emoji: '🌈',
+      accent: '#A07890',
       name: 'Tie Dye',
       desc: 'Ninho com moranguinho, finalizado com Ninho',
       priceUni: 3.00,
@@ -100,7 +100,7 @@ const CATALOG = {
     },
     {
       id: 'm5',
-      emoji: '💕',
+      accent: '#9C5A5A',
       name: 'Sensação',
       desc: 'Misto de brigadeiro com moranguinho',
       priceUni: 3.00,
@@ -108,7 +108,7 @@ const CATALOG = {
     },
     {
       id: 'm6',
-      emoji: '🇮🇹',
+      accent: '#6A7A5A',
       name: 'Napolitano',
       desc: 'Brigadeiro, Ninho e moranguinho c/ Ninho',
       priceUni: 3.00,
@@ -118,8 +118,8 @@ const CATALOG = {
   embalagem: [
     {
       id: 'e1',
-      emoji: '🎁',
-      name: 'Caixinha (4 unidades)',
+      accent: '#7A6A8A',
+      name: 'Caixinha — 4 unidades',
       desc: 'Monte com sabores de sua preferência',
       priceUni: 12.00,
       priceCento: null,
@@ -137,7 +137,7 @@ const ALL_ITEMS = [
 // ── STATE ─────────────────────────────────────────────────────────────────────
 
 const state = {
-  cart: [],           // { id, name, emoji, type, typeLabel, qty, priceUnit }
+  cart: [],           // { id, name, accent, type, typeLabel, qty, priceUnit }
   orderType: 'retirada',
   modal: {
     item: null,
@@ -200,15 +200,17 @@ function renderGrid(containerId, items) {
 
 function buildCardHTML(item) {
   const inCart = state.cart.some(c => c.id === item.id);
-  const displayPrice = item.priceCento ? `${fmt(item.priceUni)}` : fmt(item.priceUni);
+  const displayPrice = fmt(item.priceUni);
   return `
     <div class="card${inCart ? ' in-cart' : ''}" data-id="${item.id}">
-      <div class="card-emoji">${item.emoji}</div>
+      <div class="card-dot" style="background:${item.accent}"></div>
       <div class="card-name">${item.name}</div>
       <div class="card-desc">${item.desc}</div>
       <div class="card-footer">
         <div class="card-price">${displayPrice}</div>
-        <button class="card-add-btn" data-id="${item.id}" aria-label="Adicionar ${item.name}">+</button>
+        <button class="card-add-btn" data-id="${item.id}" aria-label="Adicionar ${item.name}">
+          <i class="fa-solid fa-plus"></i>
+        </button>
       </div>
     </div>
   `;
@@ -224,7 +226,7 @@ function openModal(id) {
   state.modal.type = 'uni';
   state.modal.qty = 1;
 
-  document.getElementById('m-emoji').textContent = item.emoji;
+  document.getElementById('m-accent').style.background = item.accent;
   document.getElementById('m-name').textContent = item.name;
   document.getElementById('m-desc').textContent = item.desc;
   document.getElementById('m-qty').textContent = 1;
@@ -293,7 +295,7 @@ function addToCart() {
     state.cart.push({
       id: item.id,
       name: item.name,
-      emoji: item.emoji,
+      accent: item.accent,
       type,
       typeLabel,
       qty,
@@ -305,7 +307,7 @@ function addToCart() {
   renderCards();
   renderCart();
   updateGlobalUI();
-  showToast(`${item.emoji} ${item.name} adicionado!`);
+  showToast(`${item.name} adicionado ao pedido`);
 }
 
 // ── CART RENDER ───────────────────────────────────────────────────────────────
@@ -327,8 +329,9 @@ function renderCart() {
 
   listEl.innerHTML = state.cart.map((c, i) => `
     <div class="cart-item" data-index="${i}">
+      <div class="cart-item-dot" style="background:${c.accent}"></div>
       <div class="cart-item-info">
-        <div class="cart-item-name">${c.emoji} ${c.name}</div>
+        <div class="cart-item-name">${c.name}</div>
         <div class="cart-item-type">${c.typeLabel}</div>
       </div>
       <div class="qty-ctrl">
@@ -453,8 +456,7 @@ function finalizarPedido() {
   msg += `*─── Itens ───*\n`;
 
   state.cart.forEach(c => {
-    msg += `${c.emoji} ${c.name}\n`;
-    msg += `   ${c.typeLabel} × ${c.qty} = ${fmt(c.priceUnit * c.qty)}\n`;
+    msg += `• ${c.name} (${c.typeLabel}) × ${c.qty} — ${fmt(c.priceUnit * c.qty)}\n`;
   });
 
   msg += `\n💰 *Subtotal:* ${fmt(subtotal)}`;
