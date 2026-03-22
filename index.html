@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daniela Brigadeiros Caseiros</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ══ HEADER ══════════════════════════════════════════════════════════ -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-brand">
+        <span class="brand-eyebrow">feito com amor ✦</span>
+        <h1 class="brand-name">Daniela</h1>
+        <p class="brand-sub">Brigadeiros Caseiros</p>
+      </div>
+      <div class="header-actions">
+        <a href="https://wa.me/5519997125214" target="_blank" class="icon-btn icon-btn--wa" aria-label="WhatsApp">
+          <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="https://instagram.com/DanielaLuzini" target="_blank" class="icon-btn icon-btn--ig" aria-label="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+      </div>
+    </div>
+    <div class="header-info">
+      <span><i class="fa-solid fa-clock"></i> Encomendas com 2 dias de antecedência</span>
+      <span><i class="fa-solid fa-truck"></i> Entregas a partir de R$ 3,00</span>
+    </div>
+  </header>
+
+  <!-- ══ MAIN ════════════════════════════════════════════════════════════ -->
+  <main class="main">
+
+    <!-- TABS -->
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-tab="menu" role="tab">Cardápio</button>
+      <button class="tab" data-tab="pedido" role="tab">
+        Meu Pedido
+        <span class="tab-badge" id="tab-badge" style="display:none"></span>
+      </button>
+    </div>
+
+    <!-- ── PANEL: CARDÁPIO ─────────────────────────────────────────────── -->
+    <section class="panel active" id="panel-menu">
+
+      <!-- Tradicionais -->
+      <div class="section-header">
+        <h2 class="section-title">Sabores Tradicionais</h2>
+        <p class="section-note">Até 4 sabores no cento (25 un. de cada)</p>
+      </div>
+      <div class="cards-grid" id="grid-tradicionais"></div>
+
+      <!-- Mistos -->
+      <div class="section-header" style="margin-top:2rem">
+        <h2 class="section-title">Sabores Mistos</h2>
+        <p class="section-note">Combinações especiais da Daniela</p>
+      </div>
+      <div class="cards-grid" id="grid-mistos"></div>
+
+      <!-- Embalagem -->
+      <div class="section-header" style="margin-top:2rem">
+        <h2 class="section-title">Embalagem</h2>
+      </div>
+      <div class="cards-grid" id="grid-embalagem"></div>
+
+    </section>
+
+    <!-- ── PANEL: PEDIDO ───────────────────────────────────────────────── -->
+    <section class="panel" id="panel-pedido">
+
+      <!-- Entrega/Retirada -->
+      <div class="order-type-group">
+        <button class="order-type-btn active" data-type="retirada">
+          <i class="fa-solid fa-store"></i>
+          <span>Retirada</span>
+        </button>
+        <button class="order-type-btn" data-type="entrega">
+          <i class="fa-solid fa-motorcycle"></i>
+          <span>Entrega <em>+R$ 5</em></span>
+        </button>
+      </div>
+
+      <!-- Data -->
+      <div class="form-field">
+        <label class="form-label" for="input-date">
+          <i class="fa-regular fa-calendar"></i> Data do pedido
+        </label>
+        <input type="date" id="input-date" class="form-input" />
+      </div>
+
+      <!-- Cart -->
+      <div class="cart-box">
+        <div class="cart-empty" id="cart-empty">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <p>Seu pedido está vazio.</p>
+          <small>Vá ao Cardápio e adicione itens.</small>
+        </div>
+        <div id="cart-items"></div>
+      </div>
+
+      <!-- Summary -->
+      <div class="order-summary" id="order-summary" style="display:none">
+        <div class="summary-row"><span>Subtotal</span><span id="val-subtotal">R$ 0,00</span></div>
+        <div class="summary-row" id="row-delivery" style="display:none">
+          <span>Taxa de entrega</span><span>R$ 5,00</span>
+        </div>
+        <div class="summary-row summary-total">
+          <span>Total</span><span id="val-total">R$ 0,00</span>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ══ STICKY BAR ═══════════════════════════════════════════════════════ -->
+  <div class="sticky-bar" id="sticky-bar">
+    <div class="sticky-inner">
+      <div class="sticky-info">
+        <span class="sticky-label">Total</span>
+        <span class="sticky-total" id="sticky-total">R$ 0,00</span>
+      </div>
+      <button class="btn-finish" id="btn-finish" onclick="finalizarPedido()">
+        <i class="fa-brands fa-whatsapp"></i>
+        Finalizar Pedido
+      </button>
+    </div>
+  </div>
+
+  <!-- ══ MODAL ════════════════════════════════════════════════════════════ -->
+  <div class="modal-backdrop" id="modal-backdrop">
+    <div class="modal" id="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" id="modal-close" aria-label="Fechar">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="modal-product">
+        <div class="modal-product-emoji" id="m-emoji"></div>
+        <h3 class="modal-product-name" id="m-name"></h3>
+        <p class="modal-product-desc" id="m-desc"></p>
+      </div>
+
+      <!-- Tipo -->
+      <div class="modal-section-label">Escolha o tipo</div>
+      <div class="modal-types" id="m-types"></div>
+
+      <!-- Quantidade -->
+      <div class="modal-qty-row">
+        <span class="modal-section-label" style="margin-bottom:0">Quantidade</span>
+        <div class="qty-ctrl">
+          <button class="qty-btn" id="qty-minus">−</button>
+          <span class="qty-val" id="m-qty">1</span>
+          <button class="qty-btn" id="qty-plus">+</button>
+        </div>
+      </div>
+
+      <div class="modal-subtotal">
+        Subtotal: <strong id="m-subtotal">R$ 0,00</strong>
+      </div>
+
+      <button class="btn-add-to-cart" id="btn-add-to-cart">
+        <i class="fa-solid fa-bag-shopping"></i>
+        Adicionar ao pedido
+      </button>
+    </div>
+  </div>
+
+  <!-- ══ TOAST ════════════════════════════════════════════════════════════ -->
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
