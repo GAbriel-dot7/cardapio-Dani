@@ -29,12 +29,15 @@
           <i class="fa-brands fa-instagram"></i>
           <span>@DanielaLuzini</span>
         </a>
+        <button class="link-pill link-pill--admin" id="btn-open-admin" aria-label="Painel admin">
+          <i class="fa-solid fa-lock"></i>
+        </button>
       </div>
     </div>
     <div class="header-notice">
       <span><i class="fa-regular fa-clock"></i> Encomendas com 2 dias de antecedência</span>
       <span class="dot-sep">·</span>
-      <span><i class="fa-solid fa-location-dot"></i> Entregas a partir de R$ 5,00</span>
+      <span><i class="fa-solid fa-location-dot"></i> Entregas a partir de R$ 3,00</span>
     </div>
   </header>
 
@@ -199,8 +202,8 @@
         </div>
       </div>
 
-      <!-- STEP 3: unidade avulsa (modal simples) -->
-      <div id="modal-step-unit" style="display:none">
+      <!-- STEP 3a: extras — escolher quantidade -->
+      <div id="modal-step-unit-qty" style="display:none">
         <h3 class="modal-title" id="m-unit-title"></h3>
         <p class="modal-desc" id="m-unit-desc"></p>
         <div class="modal-box-price" id="m-unit-price"></div>
@@ -214,10 +217,33 @@
           </div>
         </div>
         <div class="modal-subtotal">Subtotal: <strong id="m-unit-subtotal"></strong></div>
-        <button class="btn-primary btn-full" id="btn-add-unit">
-          <i class="fa-solid fa-bag-shopping"></i>
-          Adicionar ao pedido
+
+        <button class="btn-primary btn-full" id="btn-unit-next">
+          Escolher sabores
+          <i class="fa-solid fa-arrow-right"></i>
         </button>
+      </div>
+
+      <!-- STEP 3b: extras — preencher cada slot de sabor -->
+      <div id="modal-step-unit-flavors" style="display:none">
+        <div class="modal-flavor-header">
+          <button class="btn-back" id="btn-back-to-unit-qty">
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <div>
+            <h3 class="modal-title" id="m-unit-title-2"></h3>
+            <p class="modal-flavor-hint" id="m-unit-hint"></p>
+          </div>
+        </div>
+
+        <div id="unit-slots-list"></div>
+
+        <div class="modal-flavor-footer" style="margin-top:14px">
+          <div class="flavor-counter" id="unit-slot-counter"></div>
+          <button class="btn-primary" id="btn-confirm-unit-flavors" disabled>
+            Adicionar ao Pedido
+          </button>
+        </div>
       </div>
 
     </div>
@@ -225,6 +251,47 @@
 
   <!-- ══ TOAST ════════════════════════════════════════════════════════════ -->
   <div class="toast" id="toast"></div>
+
+  <!-- ══ ADMIN: LOGIN ══════════════════════════════════════════════════════ -->
+  <div class="admin-backdrop" id="admin-backdrop">
+    <div class="admin-modal" id="admin-modal">
+      <button class="modal-close" id="admin-close"><i class="fa-solid fa-xmark"></i></button>
+
+      <!-- LOGIN -->
+      <div id="admin-step-login">
+        <p class="admin-eyebrow">Área restrita</p>
+        <h3 class="admin-title">Painel Admin</h3>
+        <p class="admin-hint">Digite a senha para acessar</p>
+        <div class="admin-field">
+          <input type="password" id="admin-password" class="form-input" placeholder="Senha" />
+        </div>
+        <p class="admin-error" id="admin-error" style="display:none">Senha incorreta</p>
+        <button class="btn-primary btn-full" id="btn-admin-login">Entrar</button>
+      </div>
+
+      <!-- PAINEL -->
+      <div id="admin-step-panel" style="display:none">
+        <div class="admin-panel-header">
+          <div>
+            <p class="admin-eyebrow">Logado como admin</p>
+            <h3 class="admin-title">Editar Preços</h3>
+          </div>
+          <button class="btn-admin-logout" id="btn-admin-logout">Sair</button>
+        </div>
+
+        <div class="admin-section-label">Caixas</div>
+        <div id="admin-boxes-list" class="admin-items-list"></div>
+
+        <div class="admin-section-label" style="margin-top:16px">Extras</div>
+        <div id="admin-extras-list" class="admin-items-list"></div>
+
+        <button class="btn-primary btn-full" id="btn-admin-save" style="margin-top:20px">
+          <i class="fa-solid fa-floppy-disk"></i> Salvar alterações
+        </button>
+        <button class="btn-admin-reset" id="btn-admin-reset">Restaurar preços originais</button>
+      </div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
