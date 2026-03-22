@@ -108,7 +108,6 @@ function renderBoxes() {
         <div class="box-unit-label">unidades</div>
         <div class="box-flavor-info">${box.flavorDesc}</div>
         <div class="box-price">${fmt(box.price)}</div>
-        <div class="box-price-per">R$ ${perUni} / un.</div>
         <div class="box-btn">${inCart ? 'Adicionar mais' : 'Selecionar'}</div>
       </div>`;
   }).join('');

@@ -6,41 +6,41 @@
 
 /* ── TOKENS ──────────────────────────────────────────────────── */
 :root {
-  /* backgrounds */
-  --bg:           #fdf6f3;
-  --bg-2:         #faeee9;
-  --bg-3:         #f5e4dd;
+  /* backgrounds — rosa pálido chique */
+  --bg:           #f7e8e2;
+  --bg-2:         #f2ddd6;
+  --bg-3:         #ead0c8;
 
-  /* surfaces */
-  --surface:      #ffffff;
-  --surface-2:    #fdf6f3;
+  /* surfaces — branco quente levíssimo */
+  --surface:      #fdf5f2;
+  --surface-2:    #f9ede8;
 
   /* borders */
-  --border:       #edd8d0;
-  --border-2:     #e2c8be;
+  --border:       #e0c4bb;
+  --border-2:     #d4b0a5;
 
-  /* text */
-  --text:         #2d1810;
-  --text-2:       #7a4a3a;
-  --text-3:       #b08070;
+  /* text — marrom profundo */
+  --text:         #3b1a10;
+  --text-2:       #6b3a2a;
+  --text-3:       #a07060;
   --text-inv:     #ffffff;
 
-  /* accent: rosa quente */
-  --rose:         #d4607a;
-  --rose-dark:    #b84d65;
-  --rose-light:   #f5c0cc;
-  --rose-glow:    rgba(212, 96, 122, 0.14);
-  --rose-glow-md: rgba(212, 96, 122, 0.24);
+  /* accent: vinho rosado — elegante */
+  --rose:         #9e3d52;
+  --rose-dark:    #7e2f40;
+  --rose-light:   #e8b4be;
+  --rose-glow:    rgba(158, 61, 82, 0.13);
+  --rose-glow-md: rgba(158, 61, 82, 0.22);
 
-  /* accent secundário: caramelo */
-  --caramel:      #c07840;
-  --caramel-light:#f5dfc8;
+  /* accent secundário: caramelo âmbar */
+  --caramel:      #9e6030;
+  --caramel-light:#f0dbc4;
 
   /* status */
   --wa:           #25D366;
   --wa-dark:      #1aaa52;
   --ig:           #e1306c;
-  --danger:       #c44;
+  --danger:       #b33;
 
   /* geometry */
   --r-sm:   8px;
@@ -84,8 +84,8 @@ input { font-family: var(--sans); }
 
 /* ── HEADER ──────────────────────────────────────────────────── */
 .header {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border-2);
   position: sticky;
   top: 0;
   z-index: 40;
@@ -114,6 +114,7 @@ input { font-family: var(--sans); }
   font-size: 2.1rem;
   font-weight: 600;
   color: var(--text);
+  text-shadow: 0 1px 0 rgba(255,255,255,0.35);
   line-height: 1;
   letter-spacing: -0.01em;
 }
@@ -176,8 +177,8 @@ input { font-family: var(--sans); }
 .tabs {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border-2);
   position: sticky;
   top: 93px;
   z-index: 30;
